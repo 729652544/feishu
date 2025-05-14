@@ -49,6 +49,9 @@
       alert(window.ttJSBridge)
       alert(window.postMessage)
         window.postMessage({ type: 'video_exit_fullscreen' });
+      setTimeout(() => {
+      location.href = 'bytedance://back'; // 飞书小程序专用关闭方案
+    }, 100);
       if (window.ttJSBridge && window.ttJSBridge.postMessage) {
         window.ttJSBridge.postMessage({ type: 'video_exit_fullscreen' });
       } else if (window.parent !== window) {
