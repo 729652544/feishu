@@ -50,13 +50,15 @@
       alert('notifyMiniAppExitFullScreen 被触发');
       alert(window.ttJSBridge)
       alert(window.tt)
-      
-      if (window.ttJSBridge && window.ttJSBridge.postMessage) {
-        window.ttJSBridge.postMessage({ type: 'video_exit_fullscreen' });
-      } else if (window.parent !== window) {
-        // 兼容 iframe 场景，向父页面发送
-        window.parent.postMessage({ type: 'video_exit_fullscreen' }, '*');
-      }
+      tt.miniProgram.redirectTo({
+        "url": "/pages/employeeServices/monitor/list",
+      })
+      // if (window.ttJSBridge && window.ttJSBridge.postMessage) {
+      //   window.ttJSBridge.postMessage({ type: 'video_exit_fullscreen' });
+      // } else if (window.parent !== window) {
+      //   // 兼容 iframe 场景，向父页面发送
+      //   window.parent.postMessage({ type: 'video_exit_fullscreen' }, '*');
+      // }
     }
   
     document.addEventListener('fullscreenchange', () => {
