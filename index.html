@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>header偶发闪动问题测试</title>
+    <style>
+      body {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 10px;
+      }
+      header {
+        width: 1920px;
+        height: 238px;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <header
+      style="background: url('./bg-title-d.png'); background-size: 100% 100%"
+    >
+      12345
+    </header> -->
+    <video
+      class="xdr-situation-bg"
+      autoplay
+      controls
+      muted
+      loop
+      width="100%"
+      height="100%"
+    ><source
+        src="https://vjs.zencdn.net/v/oceans.mp4"
+        type="video/mp4"
+      />
+    </video>
+    <button onclick="notifyMiniAppExitFullScreen()">
+      发送退出全屏消息
+    </button>
+  </body>
+  <script>
+    function notifyMiniAppExitFullScreen() {
+      alert('notifyMiniAppExitFullScreen 被触发');
+      alert(window.ttJSBridge)
+      alert(window.postMessage)
+        window.postMessage({ type: 'video_exit_fullscreen' });
+      if (window.ttJSBridge && window.ttJSBridge.postMessage) {
+        window.ttJSBridge.postMessage({ type: 'video_exit_fullscreen' });
+      } else if (window.parent !== window) {
+        // 兼容 iframe 场景，向父页面发送
+        window.parent.postMessage({ type: 'video_exit_fullscreen' }, '*');
+      }
+    }
+  
+    document.addEventListener('fullscreenchange', () => {
+      console.log('fullscreenchange');
+      
+      if (!document.fullscreenElement) {
+        console.log('allllllll');
+        
+        notifyMiniAppExitFullScreen();
+      }
+    });
+  
+    document.addEventListener('webkitendfullscreen', () => {
+      console.log('webkitendfullscreen');
+      notifyMiniAppExitFullScreen();
+    });
+  </script>
+  
+</html>
