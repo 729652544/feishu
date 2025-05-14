@@ -48,8 +48,8 @@
   <script>
     function notifyMiniAppExitFullScreen() {
       alert('notifyMiniAppExitFullScreen 被触发');
-      alert(window.ttJSBridge)
-      alert(window.tt)
+      // alert(window.ttJSBridge)
+      alert(window.tt.miniProgram)
       tt.miniProgram.redirectTo({
         "url": "/pages/employeeServices/monitor/list",
       })
